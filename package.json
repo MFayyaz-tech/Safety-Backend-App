@@ -1,0 +1,27 @@
+{
+  "name": "safety-backend-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "npm run dev",
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
+    "express-fileupload": "^1.5.2",
+    "firebase-admin": "^13.5.0",
+    "http": "^0.0.1-security",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10",
+    "openai": "^6.7.0"
+  }
+}
