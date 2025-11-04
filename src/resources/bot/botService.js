@@ -1,6 +1,8 @@
 const OpenAI = require("openai");
 const dotenv = require("dotenv");
 dotenv.config();
+const db = require("../../db/db");
+const { request } = require("http");
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -59,7 +61,7 @@ Be proactive but concise. Never give medical or police advice directly — only 
 `;
 
 const botServices = {
-  callPrompt: async (prompt, previousMessages = []) => {
+  callPrompt: async (user, prompt, previousMessages = []) => {
     try {
       // Build conversation history
       const messages = [
@@ -84,6 +86,14 @@ const botServices = {
       // Parse JSON safely
       const parsed =
         typeof result === "string" ? JSON.parse(result) : result || {};
+      const ref = await db.collection("chats").add({
+        user: user, // replace with actual user ID
+        flag: parsed.flag || "normal",
+        request: prompt || "",
+        response: parsed.reply || "",
+        timestamp: new Date(),
+      });
+      console.log("Chat logged with ID:", ref.id);
 
       return parsed;
     } catch (error) {
