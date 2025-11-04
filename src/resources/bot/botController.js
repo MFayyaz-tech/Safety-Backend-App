@@ -6,6 +6,7 @@ const botServices = require("./botService");
 const botController = {
   callPrompt: asyncHandler(async (req, res) => {
     const response = await botServices.callPrompt(
+      req.body.user,
       req.body.prompt,
       req.body.prevousMessages
     );
